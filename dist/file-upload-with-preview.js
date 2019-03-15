@@ -14,6 +14,7 @@ var FileUploadWithPreview = function () {
 
         _classCallCheck(this, FileUploadWithPreview);
 
+        console.log('linked with success');
         if (!uploadId) {
             throw new Error('No uploadId found. You must initialize file-upload-with-preview with a unique uploadId.');
         }
@@ -76,15 +77,19 @@ var FileUploadWithPreview = function () {
                     return;
                 }
 
-                if (self.showMultiple) {
-                    self.selectedFilesCount += this.files.length;
-                } else {
-                    self.selectedFilesCount = this.files.length;
-                    //The first thing we want to do is clear whatever
-                    //we already have saved in self.cachedFileArray, as they are overwriting that now. The logic is that their
-                    //latest selection should be the one we listen to.
-                    self.cachedFileArray = [];
-                }
+                // if (self.showMultiple) {
+                //   console.log('show true')
+                //   console.log(self.selectedFilesCount)
+                //     self.selectedFilesCount += this.files.length;
+                //   console.log(self.selectedFilesCount)
+                // } else {
+                self.selectedFilesCount = this.files.length;
+                self.imagePreview.innerHTML = '';
+                self.cachedFileArray = [];
+                //The first thing we want to do is clear whatever
+                //we already have saved in self.cachedFileArray, as they are overwriting that now. The logic is that their
+                //latest selection should be the one we listen to.
+                // }
 
                 //Let's loop through the selected images
 
@@ -103,14 +108,9 @@ var FileUploadWithPreview = function () {
 
                         //If more than one file was selected show a special input label and image
                         if (self.selectedFilesCount > 1) {
-                            self.inputLabel.innerHTML = self.selectedFilesCount + ' files selected';
+                            self.inputLabel.innerHTML = self.selectedFilesCount + ' photos selectionnées';
                             // Display all images then if the "showMultiple" option is "True"
                             if (self.showMultiple) {
-                                if (self.onlyFirstImageSelected) {
-                                    self.imagePreview.innerHTML += '<div class="custom-file-container__image-multi-preview" style="background-image: url(' + self.firstImage + '); "></div>';
-                                    self.onlyFirstImageSelected = false;
-                                    self.imagePreview.backgroundImage = '';
-                                }
                                 self.imagePreview.style.backgroundImage = '';
                                 self.imagePreview.style.width = '100%';
 
